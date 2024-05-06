@@ -132,7 +132,7 @@ public class ProductDAO {
             for (int i = 1; i < imgFile.length; i++) {
                 handle.createUpdate("insert into product_img values (?,?)")
                         .bind(0, id)
-                        .bind(1,"http://localhost:8080/img/products/" + imgFile[i])
+                        .bind(1, "http://localhost:8080/img/products/" + imgFile[i])
                         .execute();
             }
             return true;
@@ -175,7 +175,7 @@ public class ProductDAO {
             for (int i = 1; i < imgFile.length; i++) {
                 handle.createUpdate("insert into product_img values (?,?)")
                         .bind(0, id)
-                        .bind(1,"http://localhost:8080/img/products/" + imgFile[i])
+                        .bind(1, "http://localhost:8080/img/products/" + imgFile[i])
                         .execute();
             }
             return true;
@@ -344,9 +344,9 @@ public class ProductDAO {
     public List<Product> getFullAdminProduct() {
         String query = "select distinct p.productId,p.ProductName,p.`Status`,p.Image,p.Price,p.Promotional,p.Quantity,p.Warranty,p.promotional,p.Description,p.Dital,p.CreateBy,p.CreateDate,p.UpdateBy,p.UpdateDate,p.giong,p.mausac,p.cannang,p.size,p.ViewCount from product p INNER JOIN product_from_cate pfc on p.productId = pfc.product_id where pfc.cate_id != 3;";
         List<Product> list = JDBIConnector.get().withHandle(handle -> {
-                return handle.createQuery(query)
-                        .mapToBean(Product.class).stream().collect(Collectors.toList());
-            });
+            return handle.createQuery(query)
+                    .mapToBean(Product.class).stream().collect(Collectors.toList());
+        });
         return list;
     }
 
@@ -448,7 +448,6 @@ public class ProductDAO {
     }
 
 
-
     public Product getProductDetail(String id) {
         Optional<Product> detail = JDBIConnector.get().withHandle(handle -> handle.createQuery("select p.productId, p.ProductName, p.Image, p.Price, p.Description, p.Dital, p.Quantity,p.Warranty, p.CreateBy, p.CreateDate, p.giong, p.mausac, p.cannang, p.`Status`, p.PromotionalPrice,p.Promotional, p.size, p.ViewCount from product p where p.productId = ?")
                 .bind(0, id)
@@ -543,16 +542,33 @@ public class ProductDAO {
                         .bind(0, idProduct).mapTo(Integer.class).first());
         return quantity;
     }
+
     public void AddViewCountProduct(String id) {
         JDBIConnector.get().withHandle(handle ->
                 handle.createUpdate("UPDATE product SET ViewCount = ViewCount + 1 WHERE ProductId=?")
                         .bind(0, id)
                         .execute());
     }
-        public static void main(String[] args) {
+    public List<Product> getProductsByCategory(String categoryId) {
+        String sql = "SELECT p.* " +
+                "FROM product p " +
+                "INNER JOIN product_from_cate pc ON p.productId = pc.product_id " +
+                "WHERE pc.cate_id = ?";
+
+        // Sử dụng Jdbi để thực hiện truy vấn SQL và ánh xạ kết quả vào đối tượng Product
+        List<Product> products = JDBIConnector.get().withHandle(handle ->
+                handle.createQuery(sql)
+                        .bind(0, categoryId)
+                        .mapToBean(Product.class)
+                        .list());
+
+        return products;
+    }
+    public static void main(String[] args) {
 //            System.out.println(new ProductDAO().getQuantityProduct("3001"));
 //            System.out.println(new ProductDAO().listRelateTo("1010"));
 //            System.out.println(new ProductDAO().getFullAdminAccessory());
-            System.out.println( new ProductDAO().getFullProduct("10","10000","10","1"));
-        }
+//            System.out.println( new ProductDAO().getFullProduct("10","10000","10","1"));
+              System.out.println(new ProductDAO().getProductsByCategory("1"));
+    }
 }
