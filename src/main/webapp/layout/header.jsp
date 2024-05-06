@@ -143,7 +143,7 @@
                             List<Detail> list = dao.listCategory();
                             for (Detail p : list) { %>
                         <li>
-                            <a href="all-product?category=<%=p.getCatID()%>">
+                            <a href="ProductByCategory?category=<%=p.getCatID()%>">
                                 <%=p.getCatName()%>
                             </a>
                         </li>
