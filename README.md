@@ -1,5 +1,5 @@
 #  <a href="https://github.com/nl-trantrungdong/petshop">Petshop</a>
-## Đồ án cuối kì môn An toàn và bảo mật hệ thống thông tin - Shop Thú Cưng
+## Đồ án cuối kì môn Công nghệ phần mềm - Shop Thú Cưng
 Một trang thương mại điện tử bán thú cưng!
 ### Thành viên:
 #### <a href="">Trần Trung Đông - 20130230</a>
