@@ -16,7 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-@WebServlet(name = "AddToCartController", value = "/api/AddCartController")
+@WebServlet(name = "AddToCartController", value = "/api/Cart/AddCartController")
 public class AddToCartController extends HttpServlet {
     CartResponse cartResponse;
     long totalCartValue = 0;
@@ -26,6 +26,11 @@ public class AddToCartController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String id = request.getParameter("idAdd");
         int quantity = Integer.parseInt(request.getParameter("quantity"));
         Cart cart = (Cart) request.getSession().getAttribute("cart");
@@ -68,10 +73,5 @@ public class AddToCartController extends HttpServlet {
             UserAccount user = (UserAccount) request.getSession().getAttribute("user");
             logService.createUserLog(user.getId(), "INFOR", "Người dùng " + user.getUsername() + " đã thêm " + product.getProductName() + " vào giỏ hàng");
         }
-    }
-
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        // Để lại trống vì bạn không sử dụng phương thức POST
     }
 }

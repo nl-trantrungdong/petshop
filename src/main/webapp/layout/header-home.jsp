@@ -56,7 +56,7 @@
                                     <a href="my-orders.jsp" class="dropdown-item">
                                         <span><i data-feather="x-square"></i> Đơn hàng của tôi</span>
                                     </a>
-                                    <a href="LogoutController" class="dropdown-item">
+                                    <a id="logoutButton" href="/api/user/LogoutController" class="dropdown-item">
                                         <span><i data-feather="x-square"></i> Đăng xuất</span>
                                     </a>
                                 </div>
@@ -217,6 +217,21 @@
         })
     })
 
+    document.getElementById('logoutButton').addEventListener('click', function() {
+        fetch('/api/user/LogoutController', {
+            method: 'GET'
+        })
+            .then(function(response) {
+                if (response.ok) {
+                    window.location.href = '/login.jsp';
+                } else {
+                    // Xử lý trường hợp phản hồi không thành công
+                }
+            })
+            .catch(function(error) {
+                console.error('Có lỗi xảy ra khi gửi yêu cầu đến server:', error);
+            });
+    });
     function searchByName(param) {
         const txtSearch = param.value;
         if (txtSearch.length > 0) {

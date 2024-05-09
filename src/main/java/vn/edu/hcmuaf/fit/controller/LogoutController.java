@@ -9,17 +9,12 @@ import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
 
-@WebServlet(name = "LogoutController", value = "/LogoutController")
+@WebServlet(name = "LogoutController", value = "/api/user/LogoutController")
 public class LogoutController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        doPost(request, response);
-    }
-
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
-        if (session!=null){
+        if (session != null) {
             LogService logService= new LogService();
 
             if(session.getAttributeNames().equals("admin")) {
@@ -30,7 +25,15 @@ public class LogoutController extends HttpServlet {
                 logService.createUserLog(account.getId(), "INFOR", "Người dùng " + account.getUsername() + " đăng xuất khỏi hệ thống");
             }
             session.invalidate();
-            response.sendRedirect("login.jsp");
+            response.setStatus(HttpServletResponse.SC_OK);
+        } else {
+            response.setStatus(HttpServletResponse.SC_BAD_REQUEST); // Set HTTP status code to 400 if session is null
         }
     }
+
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+    }
+
 }

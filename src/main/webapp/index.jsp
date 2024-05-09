@@ -454,8 +454,8 @@
                         e.preventDefault();
                     }
                     $.ajax({
-                        url: "/api/AddCartController",
-                        type: "get",
+                        url: "/api/Cart/AddCartController",
+                        type: "post",
                         data: {
                             idAdd: idAdd,
                             quantity: quantity
