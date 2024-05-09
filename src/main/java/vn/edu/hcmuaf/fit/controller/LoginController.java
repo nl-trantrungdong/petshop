@@ -13,7 +13,7 @@ import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
 
-@WebServlet(name = "LoginController", value = "/LoginController")
+@WebServlet(name = "LoginController", value = "/api/user/LoginController")
 public class LoginController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -34,7 +34,7 @@ public class LoginController extends HttpServlet {
                 HttpSession session = request.getSession();
                 session.setAttribute("admin", account);
                 response.sendRedirect("admin/index.jsp");
-
+                response.setStatus(HttpServletResponse.SC_CREATED);
                 LogService logService= new LogService();
                 UserAccount user = (UserAccount) request.getSession().getAttribute("admin");
                 logService.createAdminLog(user.getId(), "INFOR", "Admin "+user.getUsername()+" đăng nhập vào hệ thống");
@@ -44,9 +44,11 @@ public class LoginController extends HttpServlet {
                 session.setAttribute("cart", new Cart());
                 session.setAttribute("wishlist", new Wishlist());
                 if(dao.isValidKey(account.getId())){
-                    response.sendRedirect("index.jsp");
+                    response.sendRedirect("/index.jsp");
+                    response.setStatus(HttpServletResponse.SC_OK);
                 }else {
-                    response.sendRedirect("infor-user.jsp");
+                    response.sendRedirect("/infor-user.jsp");
+                    response.setStatus(HttpServletResponse.SC_OK);
                 }
                 LogService logService= new LogService();
                 UserAccount user = (UserAccount) request.getSession().getAttribute("user");
@@ -55,6 +57,7 @@ public class LoginController extends HttpServlet {
         } else {
             request.setAttribute("loginStatus", LoginService.getInstance().getStatus());
             request.getRequestDispatcher("login.jsp").forward(request, response);
+            response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
         }
     }
 

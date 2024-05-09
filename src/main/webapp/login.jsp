@@ -154,7 +154,7 @@
                             <div class="mb-4">
                                 <h3>Đăng nhập</h3>
                             </div>
-                            <form action="LoginController" method="post" id="form">
+                            <form action="api/user/LoginController" method="post" id="form">
                                 <div class="form-group first">
                                     <p> Tên đăng nhập</p>
                                     <input type="text" class="form-control" id="username" name="username">

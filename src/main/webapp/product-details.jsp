@@ -702,7 +702,7 @@
                 const idAdd = this.id;
                 const quantity = $("#quantity").val();
                 $.ajax({
-                    url: "/api/AddCartController",
+                    url: "/api/Cart/AddCartController",
                     type: "get",
                     data: {
                         idAdd: idAdd,
