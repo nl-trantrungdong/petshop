@@ -326,4 +326,7 @@ public class Product implements Serializable {
         result = 31 * result + (cate_id != null ? cate_id.hashCode() : 0);
         return result;
     }
+
+    public static void main(String[] args) {
+    }
 }

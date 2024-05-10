@@ -416,8 +416,8 @@
                     %>
 
                     <%if (Integer.parseInt(p.getQuantity()) > 0) {%>
-                    <a href="#" class="primary-btn snow" id="addCart-<%=product.getProductId()%>">Thêm vào giỏ hàng</a>
-                    <a href="#" class="heart-icon add-wishlist" id="addWishlist-<%=p.getProductId()%>"><span
+                    <a class="primary-btn snow" id="<%=product.getProductId()%>">Thêm vào giỏ hàng</a>
+                    <a  class="heart-icon add-wishlist" id="addWishlist-<%=p.getProductId()%>"><span
                             class="icon_heart_alt"></span></a>
                     <%}%>
                     <%
@@ -696,24 +696,43 @@
     })
 
     function addcart() {
-        $(".snow").each(function (e) {
+        $(".primary-btn.snow").each(function (e) {
             $(this).on("click", function (e) {
-                e.preventDefault();
                 const idAdd = this.id;
-                const quantity = $("#quantity").val();
+                const quantity =$("#quantity").val() ;
+                console.log(quantity);
+                if (idAdd) {
+                    // Nếu không có giá trị, chuyển hướng sang trang đăng nhập
+                    e.preventDefault();
+                }
                 $.ajax({
                     url: "/api/Cart/AddCartController",
-                    type: "get",
+                    type: "post",
                     data: {
                         idAdd: idAdd,
                         quantity: quantity
                     },
                     success: function (data) {
+                        console.log(data)
+                        // var response = JSON.parse(data);
+                        var mess = data.message;
+                        var totalCartValue = data.totalCartValue;
+
+                        // Cập nhật số lượng sản phẩm trong giỏ hàng
                         $(".header__second__cart--notice").each(function () {
-                            const quantity2 = $(this).text();
-                            $(this).text(parseInt(quantity2) + parseInt(quantity))
-                        })
-                        $(".header__cart__price span").text(data)
+                            // Lấy số lượng hiện tại từ phần tử DOM và chuyển đổi thành số nguyên
+                            var quantitycart = parseInt($(this).text());
+                            // Cộng thêm số lượng mới vừa thêm vào giỏ hàng và chuyển đổi thành số nguyên
+                            var newQuantity = quantitycart + parseInt(quantity);
+                            // Cập nhật phần tử DOM để hiển thị số lượng mới
+                            $(this).text(newQuantity);
+                        });
+
+                        // Cập nhật tổng giá trị giỏ hàng
+                        $(".header__cart__price").text(totalCartValue);
+
+                        // Hiển thị thông báo
+                        alert(mess);
                     }
                 })
             })
