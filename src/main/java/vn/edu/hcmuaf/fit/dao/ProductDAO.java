@@ -569,6 +569,6 @@ public class ProductDAO {
 //            System.out.println(new ProductDAO().listRelateTo("1010"));
 //            System.out.println(new ProductDAO().getFullAdminAccessory());
 //            System.out.println( new ProductDAO().getFullProduct("10","10000","10","1"));
-              System.out.println(new ProductDAO().getProductsByCategory("1"));
+              System.out.println(new ProductDAO().getProductDetail("1004").getQuantity());
     }
 }

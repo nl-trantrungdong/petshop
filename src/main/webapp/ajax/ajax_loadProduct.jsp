@@ -27,7 +27,7 @@
                             Product product = new ProductDAO().getProductDetail(p.getProductId());%>
                         <%if (Integer.parseInt(product.getQuantity())> 0) {%>
                         <li><a class="add-wishlist" id="addWishlist-<%=p.getProductId()%>"><i class="fa fa-heart"></i></a></li>
-                        <li><a class="shopnow2" id="addCart-<%=p.getProductId()%>" ><i
+                        <li><a class="shopnow2" id="<%=p.getProductId()%>" ><i
                                 class="fa fa-shopping-cart"></i></a></li>
                         <%}%>
                         <%
@@ -55,7 +55,7 @@
                             Product product = new ProductDAO().getProductDetail(p.getProductId());%>
                         <%if (Integer.parseInt(product.getQuantity())> 0) {%>
                         <li><a class="add-wishlist" id="addWishlist-<%=p.getProductId()%>"><i class="fa fa-heart"></i></a></li>
-                        <li><a class="shopnow2" id="addCart-<%=p.getProductId()%>" ><i
+                        <li><a class="shopnow2" id="<%=p.getProductId()%>" ><i
                                 class="fa fa-shopping-cart"></i></a></li>
                         <%}%>
                         <%

@@ -320,7 +320,7 @@
                                             <%if (Integer.parseInt(product.getQuantity()) > 0) {%>
                                             <li><a class="add-wishlist" id="addWishlist-<%=pd.getProductId()%>"><i
                                                     class="fa fa-heart"></i></a></li>
-                                            <li><a class="shopnow2" id="addCart-<%=pd.getProductId()%>"><i
+                                            <li><a class="shopnow2" id="<%=pd.getProductId()%>"><i
                                                     class="fa fa-shopping-cart"></i></a></li>
                                             <%}%>
                                             <%
@@ -454,7 +454,7 @@
                                                  <%if (Integer.parseInt(product.getQuantity()) > 0) {%>
                                                  <li><a class="add-wishlist" id="addWishlist-<%=pd.getProductId()%>"><i
                                                          class="fa fa-heart"></i></a></li>
-                                                 <li><a class="shopnow2" id="addCart-<%=pd.getProductId()%>"><i
+                                                 <li><a class="shopnow2" id="<%=pd.getProductId()%>"><i
                                                          class="fa fa-shopping-cart"></i></a></li>
                                                  <%}%>
                                                  <%

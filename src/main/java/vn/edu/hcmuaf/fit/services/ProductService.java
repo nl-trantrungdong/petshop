@@ -17,6 +17,7 @@ public class ProductService {
         }
         return productService;
     }
+
     public List<ImageProduct> getListImg(String id) {
         ProductDAO dao = new ProductDAO();
         return dao.getListImg(id);
@@ -66,6 +67,7 @@ public class ProductService {
                     .mapTo(String.class).stream().collect(Collectors.toList());
         });
     }
+
     public void AddViewCountProduct(String id) {
         new ProductDAO().AddViewCountProduct(id);
     }
@@ -90,30 +92,23 @@ public class ProductService {
     }
 
     public List<Product> listRelateTo(String id) {
-        return  new ProductDAO().listRelateTo(id);
+        return new ProductDAO().listRelateTo(id);
     }
 
-    public boolean isProductInOrder(String productId){
+    public boolean isProductInOrder(String productId) {
         return new ProductDAO().isProductInOrder(productId);
     }
-    public boolean isCateContainPd(String cateId){
+
+    public boolean isCateContainPd(String cateId) {
         return new ProductDAO().isCateContainPd(cateId);
     }
 
-    public int getQuantityProduct(String idProduct){
+    public int getQuantityProduct(String idProduct) {
         return new ProductDAO().getQuantityProduct(idProduct);
     }
+
     public static void main(String[] args) {
         System.out.println(getData2());
     }
-
-
-//    public static List<Product> getDataProductAdmin() {
-//        return JDBIConnector.get().withHandle(handle -> {
-//            return handle.createQuery("select * from product where productId < 3000")
-//                    .mapToBean(Product.class).stream().collect(Collectors.toList());
-//        });
-//    }
-
 
 }

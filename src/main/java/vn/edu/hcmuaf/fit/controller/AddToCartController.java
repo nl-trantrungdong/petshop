@@ -34,6 +34,7 @@ public class AddToCartController extends HttpServlet {
         String id = request.getParameter("idAdd");
         int quantity = Integer.parseInt(request.getParameter("quantity"));
         Cart cart = (Cart) request.getSession().getAttribute("cart");
+        Product product = ProductService.getInstance().getProductDetail(id);
         if (cart == null) {
             response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
             response.setContentType("application/json");
@@ -44,8 +45,17 @@ public class AddToCartController extends HttpServlet {
             out.print(jsonResponse);
             out.flush();
             return;
-        } else {
-            Product product = ProductService.getInstance().getProductDetail(id);
+        } else if (product.getQuantity().equals("0")){
+            System.out.println(product.getQuantity());
+            response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+            response.setContentType("application/json");
+            response.setCharacterEncoding("UTF-8");
+            out = response.getWriter();
+            cartResponse = new CartResponse(HttpServletResponse.SC_BAD_REQUEST,"Sản phẩm không còn hàng", totalCartValue); // Giỏ hàng rỗng
+            jsonResponse = new Gson().toJson(cartResponse);
+            out.print(jsonResponse);
+            out.flush();
+        }else {
             product.setQuantityCart(quantity);
             cart.put(id, product);
             request.getSession().setAttribute("cart", cart);

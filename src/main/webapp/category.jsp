@@ -463,7 +463,7 @@
                 }
                 $.ajax({
                     url: "/api/Cart/AddCartController",
-                    type: "get",
+                    type: "post",
                     data: {
                         idAdd: idAdd,
                         quantity: quantity
