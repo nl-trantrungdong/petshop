@@ -358,7 +358,7 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="shoping__cart__btns">
-                    <a href="all-products?category=all" class="primary-btn cart-btn">TIẾP TỤC MUA SẮM</a>
+                    <a href="index.jsp" class="primary-btn cart-btn">TIẾP TỤC MUA SẮM</a>
                 </div>
             </div>
             <div class="col-lg-6">
