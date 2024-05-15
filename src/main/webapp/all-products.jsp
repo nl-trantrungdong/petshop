@@ -579,7 +579,7 @@
                 const idAdd = this.id;
                 const quantity = 1;
                 $.ajax({
-                    url: "/api/Cart/AddCartController",
+                    url: "/api/v1/Cart/Add",
                     type: "get",
                     data: {
                         idAdd: idAdd,

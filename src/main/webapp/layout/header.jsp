@@ -190,20 +190,24 @@
     <%@include file="../js/jquery-3.3.1.min.js"%>
 </script>
 <script>
-    document.getElementById('logoutButton').addEventListener('click', function() {
-        fetch('/api/user/LogoutController', {
-            method: 'GET'
-        })
-            .then(function(response) {
-                if (response.ok) {
+    $(document).ready(function() {
+        $('#logoutButton').on('click', function() {
+            console.log('Logout button clicked.');
+
+            $.ajax({
+                url: '/api/v1/user/Logout',
+                type: 'GET',
+                success: function(response) {
+                    console.log('Logout response:', response);
+                    console.log('Logout successful, redirecting to login page.');
                     window.location.href = '/login.jsp';
-                } else {
-                    // Xử lý trường hợp phản hồi không thành công
+                },
+                error: function(xhr, status, error) {
+                    console.error('Logout request failed. Status:', status, 'Error:', error);
+                    alert('Logout failed. Please try again.');
                 }
-            })
-            .catch(function(error) {
-                console.error('Có lỗi xảy ra khi gửi yêu cầu đến server:', error);
             });
+        });
     });
     $(document).ready(function () {
         $("#search-keyword").focus(function () {
