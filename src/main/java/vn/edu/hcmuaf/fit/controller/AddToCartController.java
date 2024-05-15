@@ -16,7 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-@WebServlet(name = "AddToCartController", value = "/api/Cart/AddCartController")
+@WebServlet(name = "AddToCartController", value = "/api/v1/Cart/Add")
 public class AddToCartController extends HttpServlet {
     CartResponse cartResponse;
     long totalCartValue = 0;

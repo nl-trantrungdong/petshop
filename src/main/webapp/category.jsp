@@ -462,7 +462,7 @@
                     e.preventDefault();
                 }
                 $.ajax({
-                    url: "/api/Cart/AddCartController",
+                    url: "/api/v1/Cart/Add",
                     type: "post",
                     data: {
                         idAdd: idAdd,
