@@ -240,7 +240,7 @@
     </div>
     <div class="humberger__menu__contact">
         <ul>
-            <li><i class="fa fa-envelope"></i> LTW_nhom10@gmail.com</li>
+            <li><i class="fa fa-envelope"></i> cnpm_nhom9@gmail.com</li>
             <li>Free Shipping for all Order of $99</li>
         </ul>
     </div>

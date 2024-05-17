@@ -218,7 +218,7 @@
            </div>
            <div class="humberger__menu__contact">
                <ul>
-                   <li><i class="fa fa-envelope"></i>  LTW_nhom10@gmail.com</li>
+                   <li><i class="fa fa-envelope"></i>  cnpm_nhom9@gmail.com</li>
                    <li>Free Shipping for all Order of $99</li>
                </ul>
            </div>
@@ -279,7 +279,7 @@
                     <div class="contact__widget">
                         <span class="icon_mail_alt"></span>
                         <h4>Email</h4>
-                        <p>LTW_nhom10@gmail.com</p>
+                        <p>cnpm_nhom9@gmail.com</p>
                     </div>
                 </div>
             </div>

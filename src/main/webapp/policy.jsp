@@ -216,7 +216,7 @@
                </div>
                <div class="humberger__menu__contact">
                    <ul>
-                       <li><i class="fa fa-envelope"></i>  LTW_nhom10@gmail.com</li>
+                       <li><i class="fa fa-envelope"></i>  cnpm_nhom9@gmail.com</li>
                        <li>Free Shipping for all Order of $99</li>
                    </ul>
                </div>
@@ -260,7 +260,7 @@
         <P> Trả lại hàng hoá đã nhận nhưng chưa sử dụng hoặc hưởng bất kỳ lợi ích nào từ hàng hóa đó (theo quy định của chính sách đổi trả hàng tại Chính sách đổi/ trả hàng và hoàn tiền)</P>
         <h5><strong>6. Giải quyết hậu quả do lỗi nhập sai thông tin tại PetShop</strong></h5>
         <P>Khách hàng có trách nhiệm cung cấp thông tin đầy đủ và chính xác khi tham gia giao dịch tại PetShop. Trong trường hợp khách hàng nhập sai thông tin và gửi vào trang TMĐT PetShop, PetShop có quyền từ chối thực hiện giao dịch. Ngoài ra, trong mọi trường hợp, khách hàng đều có quyền đơn phương chấm dứt giao dịch nếu đã thực hiện các biện pháp sau đây:</P>
-        <p>Thông báo cho PetShop qua đường dây nóng +84 987.145.145 hoặc gửi email đến địa chỉ LTW_nhom10@gmail.com</p>
+        <p>Thông báo cho PetShop qua đường dây nóng +84 987.145.145 hoặc gửi email đến địa chỉ cnpm_nhom9@gmail.com</p>
         <p>Trả lại hàng hoá đã nhận nhưng chưa sử dụng hoặc hưởng bất kỳ lợi ích nào từ hàng hóa đó.</p>
         <p>Trong trường hợp sai thông tin phát sinh từ phía PetShop mà PetShop có thể chứng minh đó là lỗi của hệ thống hoặc từ bên thứ ba (sai giá sản phẩm, sai xuất xứ, …), PetShop  sẽ đền bù cho khách hàng một mã giảm giá cho các lần mua sắm tiếp theo với mệnh giá tùy từng trường hợp cụ thể và có quyền không thực hiện giao dịch bị lỗi.</p>
         <h5> <strong>7. Thương hiệu và bản quyền</strong></h5>
