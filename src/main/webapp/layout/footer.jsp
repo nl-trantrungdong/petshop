@@ -17,7 +17,7 @@
                     <ul>
                         <li>Địa chỉ: TP.HCM, Việt Nam</li>
                         <li>Điện thoại: +85 987.145.xxx</li>
-                        <li>Email: LTW_nhom10@gmail.com</li>
+                        <li>Email: cnpm_nhom9@gmail.com</li>
                     </ul>
                 </div>
             </div>

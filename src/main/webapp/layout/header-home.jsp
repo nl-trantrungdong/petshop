@@ -25,7 +25,7 @@
                 <div class="col-lg-6 col-md-6">
                     <div class="header__top__left">
                         <ul>
-                            <li><i class="fa fa-envelope"></i> cnpm_nhom10@gmail.com</li>
+                            <li><i class="fa fa-envelope"></i> cnpm_nhom9@gmail.com</li>
                             <li>Hệ thống cửa hàng thú cưng</li>
                         </ul>
                     </div>
