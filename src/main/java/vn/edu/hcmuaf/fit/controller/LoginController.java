@@ -33,7 +33,7 @@ public class LoginController extends HttpServlet {
                 account.setRole(LoginService.getInstance().getListRoleAdmin(account.getId()));
                 HttpSession session = request.getSession();
                 session.setAttribute("admin", account);
-                response.sendRedirect("admin/index.jsp");
+                response.sendRedirect("/admin/index.jsp");
                 response.setStatus(HttpServletResponse.SC_CREATED);
                 LogService logService= new LogService();
                 UserAccount user = (UserAccount) request.getSession().getAttribute("admin");
