@@ -41,6 +41,14 @@ public class BlogService {
         return dao.AdminListBlog();
     }
 
+    public static void main(String[] args) {
+        List<Blogs> list = new BlogService().AdminListBlog();
+        for (Blogs b : list){
+            System.out.println(b.getBlogName());
+        }
+
+    }
+
     public static Blogs getBlog(String id) {
         BlogDAO dao = new BlogDAO();
         return dao.getBlog(id);

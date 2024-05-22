@@ -130,6 +130,10 @@ public class ProductDAO {
                     .bind(0, id)
                     .bind(1, cateChild)
                     .execute();
+            handle.createUpdate("insert into warehouse values (?,?)")
+                    .bind(0, id)
+                    .bind(1, quantity)
+                    .execute();
             for (int i = 1; i < imgFile.length; i++) {
                 handle.createUpdate("insert into product_img values (?,?)")
                         .bind(0, id)
