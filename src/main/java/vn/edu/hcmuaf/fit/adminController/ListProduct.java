@@ -28,4 +28,10 @@ public class ListProduct extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
     }
+
+    public static void main(String[] args) {
+        ProductDAO dao = new ProductDAO();
+        List<Product> list = dao.getFullAdminAccessory();
+        System.out.println(list.stream().toList());
+    }
 }

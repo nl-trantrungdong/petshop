@@ -38,10 +38,18 @@
                 </li>
                 <li class="dropdown pc-h-item">
                     <a class="pc-head-link dropdown-toggle arrow-none mr-0" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
-                        <img src="http://localhost:8080/<%=user.getAvt()%>" alt="user-image" class="user-avtar">
+                        <% if (user != null) { %>
+                        <img src="http://localhost:8080/<%= user.getAvt() %>" alt="user-image" class="user-avtar">
+                        <% } else { %>
+                        <img src="http://localhost:8080/path/to/default/avatar.png" alt="default-user-image" class="user-avtar">
+                        <% } %>
                         <span>
-								<span class="user-name"><%=user.getName()%></span>
+                            <% if (user != null) { %>
+                            <span class="user-name"><%=user.getName()%></span>
+                            <% } else { %>
+								<span class="user-desc">Quản lý cấp 1</span>
 <%--								<span class="user-desc">Quản lý cấp 1</span>--%>
+                            <% } %>
 							</span>
                     </a>
                     <div class="dropdown-menu dropdown-menu-right pc-h-dropdown">

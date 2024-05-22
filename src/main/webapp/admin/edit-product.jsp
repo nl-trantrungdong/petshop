@@ -142,7 +142,7 @@
     <div class="navbar-wrapper">
         <div class="m-header">
             <a href="index.jsp" class="b-brand">
-                <!-- ========   change your logo hear   ============ -->
+                <!-- ========   change your logo here   ============ -->
                 <img src="assets/images/logo.png" alt="" class="logo logo-lg">
                 <img src="assets/images/logo-sm.svg" alt="" class="logo logo-sm">
             </a>
@@ -297,17 +297,7 @@
                                 <h2 class="mb-2">Thêm thú cưng</h2>
                                 <%}%>
                             </div>
-                            <div class="col-auto">
-                                <%if (request.getParameter("pid") != null) {%>
-                                <button class="btn btn-primary mb-2 mb-sm-0" type="submit">
-                                    Sửa thú cưng
-                                </button>
-                                <%} else {%>
-                                <button class="btn btn-primary mb-2 mb-sm-0" type="submit">
-                                    Đăng thú cưng
-                                </button>
-                                <%}%>
-                            </div>
+
                         </div>
                         <input type="text" id="pid" name="pid"
                                value="<%=(p != null) ? request.getParameter("pid") : null%>" style="display: none">
@@ -592,6 +582,17 @@
                                                 </div>
                                             </div>
                                         </div>
+                                    </div>
+                                    <div class="col-auto">
+                                        <%if (request.getParameter("pid") != null) {%>
+                                        <button class="btn btn-primary mb-2 mb-sm-0" type="submit">
+                                            Sửa thú cưng
+                                        </button>
+                                        <%} else {%>
+                                        <button class="btn btn-primary mb-2 mb-sm-0" type="submit">
+                                            Đăng thú cưng
+                                        </button>
+                                        <%}%>
                                     </div>
                                 </div>
                             </div>
