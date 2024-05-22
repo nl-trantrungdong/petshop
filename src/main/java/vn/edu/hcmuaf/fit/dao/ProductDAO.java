@@ -104,7 +104,7 @@ public class ProductDAO {
         JDBIConnector.get().withHandle(handle -> {
             handle.createUpdate("insert into product (productId, ProductName, Image, Price, Description, " +
                             "Dital, Quantity, CreateBy, CreateDate, giong, mausac, cannang, `Status`, PromotionalPrice,Promotional, size, ViewCount) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)")
-                    .bind(0, id)3
+                    .bind(0, id)
                     .bind(1, name)
                     .bind(2, "http://localhost:8080/img/products/" + imgFile[0])
                     .bind(3, price)
