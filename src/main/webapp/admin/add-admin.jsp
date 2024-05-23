@@ -504,7 +504,7 @@
                     per: per
                 },
                 success: function (data) {
-                    window.location.href = "http://localhost:8080/admin/add-admin.jsp?idUser=" + idAdmin
+                    window.location.href = "http://petsshop.io.vn/admin/add-admin.jsp?idUser=" + idAdmin
                 }
             })
         }
