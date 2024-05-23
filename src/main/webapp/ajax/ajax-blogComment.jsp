@@ -18,7 +18,7 @@
                     <div class="d-flex justify-content-between align-items-center">
 
                         <div class="user d-flex flex-row align-items-center">
-                            <img src="http://localhost:8080/<%=UserService.getInstance().getUserDetail(cmt.getCustomerID()).getAvt()%>" width="35" height="35" class="user-img rounded-circle mr-2">
+                            <img src="http://petsshop.io.vn/<%=UserService.getInstance().getUserDetail(cmt.getCustomerID()).getAvt()%>" width="35" height="35" class="user-img rounded-circle mr-2">
 
                             <span><small class="font-weight-bold text-primary"><%=UserService.getInstance().getUserDetail(cmt.getCustomerID()).getName()%></small> <small class="font-weight-bold" style="padding-left: 10px; font-size: 14px"><%=cmt.getDescription()%></small></span>
                         </div>

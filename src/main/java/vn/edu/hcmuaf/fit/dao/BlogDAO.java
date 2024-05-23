@@ -184,7 +184,7 @@ public class BlogDAO {
                     .bind(0, id)
                     .bind(1, name)
                     .bind(2, status)
-                    .bind(3, "http://localhost:8080/img/blog/"+image)
+                    .bind(3, "http://petsshop.io.vn/img/blog/"+image)
                     .bind(4, description)
                     .bind(5, dital)
                     .bind(6, createBy)
@@ -217,7 +217,7 @@ public class BlogDAO {
                     .bind(5, id)
                     .bind(0, name)
                     .bind(1, status)
-                    .bind(2, "http://localhost:8080/img/blog/"+image)
+                    .bind(2, "http://petsshop.io.vn/img/blog/"+image)
                     .bind(3, description)
                     .bind(4, dital)
                     .execute();
