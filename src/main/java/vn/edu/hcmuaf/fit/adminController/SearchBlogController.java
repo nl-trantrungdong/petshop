@@ -30,7 +30,7 @@ public class SearchBlogController extends HttpServlet {
             out.println("<div class=\"col-lg-6 col-md-6 col-sm-6\" style=\"width: min-content;padding-right: 80px;padding-left: 80px;padding-bottom: 20px\">\n" +
                     "                    <div class=\"blog__item\">\n" +
                     "                        <div class=\"blog__item__pic\">\n" +
-                    "                            <img src=\"http://localhost:8080/"+b.getImage()+"\" alt=\"\" width=\"400px\" height=\"200px\" style=\"object-fit: cover\">\n" +
+                    "                            <img src=\"http://petsshop.io.vn/"+b.getImage()+"\" alt=\"\" width=\"400px\" height=\"200px\" style=\"object-fit: cover\">\n" +
                     "                        </div>\n" +
                     "                        <div class=\"blog__item__text\">\n" +
                     "                            <ul>\n" +

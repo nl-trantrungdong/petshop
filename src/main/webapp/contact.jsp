@@ -293,17 +293,17 @@
             src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d49116.39176087041!2d-86.41867791216099!3d39.69977417971648!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x886ca48c841038a1%3A0x70cfba96bf847f0!2sPlainfield%2C%20IN%2C%20USA!5e0!3m2!1sen!2sbd!4v1586106673811!5m2!1sen!2sbd"
             height="500" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0">
         </iframe> -->
-        <div style="width: 100%"><iframe width="100%" height="500" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?width=100%25&amp;height=100%25&amp;hl=en&amp;q=Tr%C6%B0%E1%BB%9Dng%20%C4%90%E1%BA%A1i%20h%E1%BB%8Dc%20N%C3%B4ng%20L%C3%A2m+(My%20Business%20Name)&amp;t=&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"><a href="https://www.gps.ie/sport-gps/">hiking gps</a></iframe></div>
-        <div class="map-inside">
-            <i class="icon_pin"></i>
-            <div class="inside-widget">
-                <h4>Đại Học Nông Lâm</h4>
-                <ul>
-                    <li>Điện thoại: +85 987.145.xxx</li>
-                    <li>Địa chỉ: Thủ Đức, TP.HCM, Việt Nam</li>
-                </ul>
-            </div>
-        </div>
+        <div style="width: 100%"><iframe width="100%" height="500" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d36216.232886080244!2d106.77388205968785!3d10.864047424859036!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3175276398969f7b%3A0x9672b7efd0893fc4!2sUniversity%20of%20Agriculture%20and%20Forestry!5e0!3m2!1sen!2sus!4v1716019224711!5m2!1sen!2sus"></iframe></div>
+<%--        <div class="map-inside">--%>
+<%--            <i class="icon_pin"></i>--%>
+<%--            <div class="inside-widget">--%>
+<%--                <h4>Đại Học Nông Lâm</h4>--%>
+<%--                <ul>--%>
+<%--                    <li>Điện thoại: +85 987.145.xxx</li>--%>
+<%--                    <li>Địa chỉ: Thủ Đức, TP.HCM, Việt Nam</li>--%>
+<%--                </ul>--%>
+<%--            </div>--%>
+<%--        </div>--%>
     </div>
     <!-- Map End -->
 

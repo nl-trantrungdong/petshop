@@ -38,11 +38,13 @@
                 </li>
                 <li class="dropdown pc-h-item">
                     <a class="pc-head-link dropdown-toggle arrow-none mr-0" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
+
                         <% if (user != null) { %>
                         <img src="http://localhost:8080/<%= user.getAvt() %>" alt="user-image" class="user-avtar">
                         <% } else { %>
                         <img src="http://localhost:8080/path/to/default/avatar.png" alt="default-user-image" class="user-avtar">
                         <% } %>
+                        <img src="http://petsshop.io.vn/<%=user.getAvt()%>" alt="user-image" class="user-avtar">
                         <span>
                             <% if (user != null) { %>
                             <span class="user-name"><%=user.getName()%></span>
