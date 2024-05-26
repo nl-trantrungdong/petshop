@@ -1,20 +1,25 @@
 package vn.edu.hcmuaf.fit.adminController;
 
+import com.google.gson.Gson;
 import vn.edu.hcmuaf.fit.beans.UserAccount;
 import vn.edu.hcmuaf.fit.dao.ProductDAO;
+import vn.edu.hcmuaf.fit.filter.EditProductResponse;
 import vn.edu.hcmuaf.fit.services.LogService;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
+import java.io.*;
 import java.util.Arrays;
 
 @WebServlet(name = "EditProductController", value = "/admin/edit-product")
 public class EditProductController extends HttpServlet {
+
+    EditProductResponse edtResponse;
+    String jsonResponse;
+    Gson gson = new Gson();
+    PrintWriter out;
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -28,7 +33,7 @@ public class EditProductController extends HttpServlet {
         String pgiong = request.getParameter("giong");
         String pmausac = request.getParameter("mausac");
         String pcannang = request.getParameter("cannang");
-        String oldImg = request.getParameter("oldImg");
+//        String oldImg = request.getParameter("oldImg");
         String CateParent = request.getParameter("CateParent");
         String cateChild = request.getParameter("cateChild");
         String status = request.getParameter("status");
@@ -40,8 +45,12 @@ public class EditProductController extends HttpServlet {
         ProductDAO dao = new ProductDAO();
 
         if (pid.equals("null")) {
+            response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+            response.setContentType("application/json");
+            response.setCharacterEncoding("UTF-8");
+            out = response.getWriter();
             String id = dao.insertProduct(AdminUser.getId(),pname,pprice,pdescription,detail,quantity,pgiong,pmausac,pcannang,CateParent,cateChild,status,Promotional,PromotionalPrice, imgFile);
-            removeOldImg(oldImg, request);
+//            removeOldImg(oldImg, request);
             copyImage(request, imgFile);
 
             LogService logService= new LogService();
@@ -49,7 +58,7 @@ public class EditProductController extends HttpServlet {
             logService.createUserLog(userAccount.getId(), "INFOR", "Admin "+userAccount.getUsername()+" đã thêm "+dao.getProductDetail(id).getProductName()+" làm sản phẩm thú cưng mới");
         } else {
             dao.updateProduct(pid,AdminUser.getId(),pname,pprice,pdescription,detail,quantity,pgiong,pmausac,pcannang,CateParent,cateChild,status,Promotional,PromotionalPrice, imgFile);
-            removeOldImg(oldImg, request);
+//            removeOldImg(oldImg, request);
             copyImage(request, imgFile);
 
             LogService logService= new LogService();
@@ -75,19 +84,27 @@ public class EditProductController extends HttpServlet {
 
     public void copyImage(HttpServletRequest request, String[] imgFile) throws IOException {
         if (imgFile != null) {
-                File file = new File(request.getServletContext().getAttribute("TEMPPRODUCT_DIR") + File.separator + imgFile);
-                FileInputStream fis = new FileInputStream(file);
-                File local = new File(request.getServletContext().getAttribute("FILEPRODUCT_DIR") + File.separator + imgFile);
-                FileOutputStream fos = new FileOutputStream(local);
-                byte[] bytes = new byte[1024];
-                int read;
-                while ((read = fis.read(bytes)) != -1) {
-                    fos.write(bytes, 0, read);
+            for (String fileName : imgFile) {
+                if (fileName != null && !fileName.isEmpty()) {
+                    File file = new File(request.getServletContext().getAttribute("TEMPPRODUCT_DIR") + File.separator + fileName);
+                    if (file.exists()) {
+                        File local = new File(request.getServletContext().getAttribute("FILEPRODUCT_DIR") + File.separator + fileName);
+                        try (FileInputStream fis = new FileInputStream(file); FileOutputStream fos = new FileOutputStream(local)) {
+                            byte[] bytes = new byte[1024];
+                            int read;
+                            while ((read = fis.read(bytes)) != -1) {
+                                fos.write(bytes, 0, read);
+                            }
+                        }
+                    } else {
+                        throw new FileNotFoundException("File does not exist: " + file.getAbsolutePath());
+                    }
                 }
-                fis.close();
-                fos.close();
+            }
         }
     }
+
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         processRequest(request, response);

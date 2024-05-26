@@ -61,6 +61,7 @@ public class ProductService {
         });
     }
 
+
     public static List<String> getData5() {
         return JDBIConnector.get().withHandle(handle -> {
             return handle.createQuery("select distinct giong from product having giong != \"null\" ")

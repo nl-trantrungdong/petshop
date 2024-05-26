@@ -104,6 +104,7 @@ public class ProductDAO {
         JDBIConnector.get().withHandle(handle -> {
             handle.createUpdate("insert into product (productId, ProductName, Image, Price, Description, " +
                             "Dital, Quantity, CreateBy, CreateDate, giong, mausac, cannang, `Status`, PromotionalPrice,Promotional, size, ViewCount) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)")
+                    .bind(0, id)
                     .bind(1, name)
                     .bind(2, "http://petsshop.io.vn/img/products/" + imgFile[0])
                     .bind(3, price)
@@ -128,6 +129,10 @@ public class ProductDAO {
             handle.createUpdate("insert into product_from_cate values (?,?)")
                     .bind(0, id)
                     .bind(1, cateChild)
+                    .execute();
+            handle.createUpdate("insert into warehouse values (?,?)")
+                    .bind(0, id)
+                    .bind(1, quantity)
                     .execute();
             for (int i = 1; i < imgFile.length; i++) {
                 handle.createUpdate("insert into product_img values (?,?)")
@@ -342,7 +347,7 @@ public class ProductDAO {
     }
 
     public List<Product> getFullAdminProduct() {
-        String query = "select distinct p.productId,p.ProductName,p.`Status`,p.Image,p.Price,p.Promotional,p.Quantity,p.Warranty,p.promotional,p.Description,p.Dital,p.CreateBy,p.CreateDate,p.UpdateBy,p.UpdateDate,p.giong,p.mausac,p.cannang,p.size,p.ViewCount from product p INNER JOIN product_from_cate pfc on p.productId = pfc.product_id where pfc.cate_id != 3;";
+        String query = "select distinct p.productId,p.ProductName,p.`Status`,p.Image,p.Price,p.Promotional,p.Quantity,p.Warranty,p.Description,p.Dital,p.CreateBy,p.CreateDate,p.UpdateBy,p.UpdateDate,p.giong,p.mausac,p.cannang,p.size,p.ViewCount from product p INNER JOIN product_from_cate pfc on p.productId = pfc.product_id where pfc.cate_id != 3;";
         List<Product> list = JDBIConnector.get().withHandle(handle -> {
             return handle.createQuery(query)
                     .mapToBean(Product.class).stream().collect(Collectors.toList());
@@ -351,7 +356,7 @@ public class ProductDAO {
     }
 
     public List<Product> getFullAdminAccessory() {
-        String query = "select distinct p.productId,p.ProductName,p.`Status`,p.Image,p.Price,p.Promotional,p.Quantity,p.Warranty,p.promotional,p.Description,p.Dital,p.CreateBy,p.CreateDate,p.UpdateBy,p.UpdateDate,p.giong,p.mausac,p.cannang,p.size,p.ViewCount from product p INNER JOIN product_from_cate pfc on p.productId = pfc.product_id where pfc.cate_id = 3;";
+        String query = "select distinct p.productId,p.ProductName,p.`Status`,p.Image,p.Price,p.Promotional,p.Quantity,p.Warranty,p.Description,p.Dital,p.CreateBy,p.CreateDate,p.UpdateBy,p.UpdateDate,p.giong,p.mausac,p.cannang,p.size,p.ViewCount from product p INNER JOIN product_from_cate pfc on p.productId = pfc.product_id where pfc.cate_id = 3;";
         List<Product> list = JDBIConnector.get().withHandle(handle -> {
             return handle.createQuery(query)
                     .mapToBean(Product.class).stream().collect(Collectors.toList());
@@ -362,7 +367,7 @@ public class ProductDAO {
 
     public List<Product> getNext9Product(int amount, String category, String price, String size, String order_by) {
 
-        String query = "select distinct p.productId,p.ProductName,p.`Status`,p.Image,p.Price,p.Promotional,p.Quantity,p.Warranty,p.promotional,p.Description,p.Dital,p.CreateBy,p.CreateDate,p.UpdateBy,p.UpdateDate,p.giong,p.mausac,p.cannang,p.size,p.ViewCount from product p INNER JOIN product_from_cate pfc on p.productId = pfc.product_id \n" +
+        String query = "select distinct p.productId,p.ProductName,p.`Status`,p.Image,p.Price,p.Promotional,p.Quantity,p.Warranty,p.Description,p.Dital,p.CreateBy,p.CreateDate,p.UpdateBy,p.UpdateDate,p.giong,p.mausac,p.cannang,p.size,p.ViewCount from product p INNER JOIN product_from_cate pfc on p.productId = pfc.product_id \n" +
                 "WHERE p.`Status` = 1 ";
         if (category != null) {
             if (!category.equals("all")) {
@@ -412,7 +417,7 @@ public class ProductDAO {
 
     public List<Product> getNext6ProductAdmin(int amount) {
 
-        String query = "select distinct p.productId,p.ProductName,p.`Status`,p.Image,p.Price,p.Promotional,p.Quantity,p.Warranty,p.promotional,p.Description,p.Dital,p.CreateBy,p.CreateDate,p.UpdateBy,p.UpdateDate,p.giong,p.mausac,p.cannang,p.size,p.ViewCount from product p INNER JOIN product_from_cate pfc on p.productId = pfc.product_id where pfc.cate_id != 3 " +
+        String query = "select distinct p.productId,p.ProductName,p.`Status`,p.Image,p.Price,p.Promotional,p.Quantity,p.Warranty,p.Description,p.Dital,p.CreateBy,p.CreateDate,p.UpdateBy,p.UpdateDate,p.giong,p.mausac,p.cannang,p.size,p.ViewCount from product p INNER JOIN product_from_cate pfc on p.productId = pfc.product_id where pfc.cate_id != 3 " +
                 "limit ?,6;";
         List<Product> list = JDBIConnector.get().withHandle(handle -> {
             return handle.createQuery(query)
@@ -424,7 +429,7 @@ public class ProductDAO {
 
     public List<Product> getNext6AccessoriesAdmin(int amount) {
 
-        String query = "select distinct p.productId,p.ProductName,p.`Status`,p.Image,p.Price,p.Promotional,p.Quantity,p.Warranty,p.promotional,p.Description,p.Dital,p.CreateBy,p.CreateDate,p.UpdateBy,p.UpdateDate,p.giong,p.mausac,p.cannang,p.size,p.ViewCount from product p INNER JOIN product_from_cate pfc on p.productId = pfc.product_id where pfc.cate_id = 3 " +
+        String query = "select distinct p.productId,p.ProductName,p.`Status`,p.Image,p.Price,p.Promotional,p.Quantity,p.Warranty,p.Description,p.Dital,p.CreateBy,p.CreateDate,p.UpdateBy,p.UpdateDate,p.giong,p.mausac,p.cannang,p.size,p.ViewCount from product p INNER JOIN product_from_cate pfc on p.productId = pfc.product_id where pfc.cate_id = 3 " +
                 "limit ?,6;";
         List<Product> list = JDBIConnector.get().withHandle(handle -> {
             return handle.createQuery(query)
