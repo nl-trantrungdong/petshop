@@ -3,6 +3,7 @@ package vn.edu.hcmuaf.fit.adminController;
 import com.google.gson.Gson;
 import vn.edu.hcmuaf.fit.beans.UserAccount;
 import vn.edu.hcmuaf.fit.dao.ProductDAO;
+import vn.edu.hcmuaf.fit.filter.CartResponse;
 import vn.edu.hcmuaf.fit.filter.EditProductResponse;
 import vn.edu.hcmuaf.fit.services.LogService;
 
@@ -18,6 +19,7 @@ public class EditProductController extends HttpServlet {
     EditProductResponse edtResponse;
     String jsonResponse;
     Gson gson = new Gson();
+    String getJsonResponse;
     PrintWriter out;
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
@@ -44,7 +46,16 @@ public class EditProductController extends HttpServlet {
         UserAccount AdminUser = (UserAccount) request.getSession().getAttribute("admin");
         ProductDAO dao = new ProductDAO();
 
-        if (pid.equals("null")) {
+        if(AdminUser == null){
+            response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+            response.setContentType("application/json");
+            response.setCharacterEncoding("UTF-8");
+            out = response.getWriter();
+            edtResponse = new EditProductResponse(HttpServletResponse.SC_UNAUTHORIZED,"Admin chưa đăng nhập "); // Giỏ hàng rỗng
+            jsonResponse = new Gson().toJson(edtResponse);
+            out.print(jsonResponse);
+            out.flush();
+        }else if (pid.equals("null")) {
             response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
             response.setContentType("application/json");
             response.setCharacterEncoding("UTF-8");
@@ -56,7 +67,16 @@ public class EditProductController extends HttpServlet {
             LogService logService= new LogService();
             UserAccount userAccount = (UserAccount) request.getSession().getAttribute("admin");
             logService.createUserLog(userAccount.getId(), "INFOR", "Admin "+userAccount.getUsername()+" đã thêm "+dao.getProductDetail(id).getProductName()+" làm sản phẩm thú cưng mới");
+
+            out = response.getWriter();
+            edtResponse = new EditProductResponse(HttpServletResponse.SC_UNAUTHORIZED,"Admin đã thêm sản phẩm thú cưng"); // Giỏ hàng rỗng
+            jsonResponse = new Gson().toJson(edtResponse);
+            out.print(jsonResponse);
+            out.flush();
         } else {
+            response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+            response.setContentType("application/json");
+            response.setCharacterEncoding("UTF-8");
             dao.updateProduct(pid,AdminUser.getId(),pname,pprice,pdescription,detail,quantity,pgiong,pmausac,pcannang,CateParent,cateChild,status,Promotional,PromotionalPrice, imgFile);
 //            removeOldImg(oldImg, request);
             copyImage(request, imgFile);
@@ -64,8 +84,14 @@ public class EditProductController extends HttpServlet {
             LogService logService= new LogService();
             UserAccount userAccount = (UserAccount) request.getSession().getAttribute("admin");
             logService.createUserLog(userAccount.getId(), "INFOR", "Admin "+userAccount.getUsername()+" đã chỉnh sửa sản phẩm thú cưng "+dao.getProductDetail(pid).getProductName());
+
+            out = response.getWriter();
+            edtResponse = new EditProductResponse(HttpServletResponse.SC_UNAUTHORIZED,"Admin đã chỉnh sửa sản phẩm thú cưng"); // Giỏ hàng rỗng
+            jsonResponse = new Gson().toJson(edtResponse);
+            out.print(jsonResponse);
+            out.flush();
         }
-        response.sendRedirect("list-products");
+//        response.sendRedirect("list-products");
     }
     private void removeOldImg(String oldImg, HttpServletRequest request) {
         if (oldImg.length() > 0) {
