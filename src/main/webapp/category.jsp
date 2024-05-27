@@ -329,6 +329,7 @@
                             <%
                             } else {%>
                             <li><a class="add-wishlist" href="login.jsp"><i class="fa fa-heart"></i></a></li>
+                            <!-- 3. Chuyển đến trang login -->
                             <li><a class="shopnow2" href="login.jsp"><i
                                     class="fa fa-shopping-cart"></i></a></li>
                             <%  }
@@ -451,7 +452,7 @@
         addcart();
         addwishlist();
     })
-
+    // 2. Function addcart()
     function addcart() {
         $(".shopnow2").each(function (e) {
             $(this).on("click", function (e) {
@@ -460,33 +461,36 @@
                 if (idAdd) {
                     // Nếu không có giá trị, chuyển hướng sang trang đăng nhập
                     e.preventDefault();
+                    // 4. Call Post: host://api/v1/Cart/Add
+                    $.ajax({
+                        url: "/api/v1/Cart/Add",
+                        type: "post",
+                        data: {
+                            idAdd: idAdd,
+                            quantity: quantity
+                        },
+                        success: function (data) {
+                            console.log(data)
+                            // var response = JSON.parse(data);
+                            var mess = data.message;
+                            var totalCartValue = data.totalCartValue;
+
+                            // Cập nhật số lượng sản phẩm trong giỏ hàng
+                            // 6. Cập nhật dữ liệu lên trang web
+                            $(".header__second__cart--notice").each(function () {
+                                var quantity = $(this).text()
+                                $(this).text(parseInt(quantity) + 1)
+                            });
+
+                            // Cập nhật tổng giá trị giỏ hàng
+                            $(".header__cart__price").text(totalCartValue);
+
+                            // Hiển thị thông báo
+                            alert(mess);
+                        }
+                    })
                 }
-                $.ajax({
-                    url: "/api/v1/Cart/Add",
-                    type: "post",
-                    data: {
-                        idAdd: idAdd,
-                        quantity: quantity
-                    },
-                    success: function (data) {
-                        console.log(data)
-                        // var response = JSON.parse(data);
-                        var mess = data.message;
-                        var totalCartValue = data.totalCartValue;
 
-                        // Cập nhật số lượng sản phẩm trong giỏ hàng
-                        $(".header__second__cart--notice").each(function () {
-                            var quantity = $(this).text()
-                            $(this).text(parseInt(quantity) + 1)
-                        });
-
-                        // Cập nhật tổng giá trị giỏ hàng
-                        $(".header__cart__price").text(totalCartValue);
-
-                        // Hiển thị thông báo
-                        alert(mess);
-                    }
-                })
             })
         });
     }
