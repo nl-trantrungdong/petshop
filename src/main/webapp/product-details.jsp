@@ -422,6 +422,7 @@
                     <%}%>
                     <%
                     } else {%>
+                    <!-- 3. Chuyển đến trang login -->
                     <a href="login.jsp" class="primary-btn snow">Thêm vào giỏ hàng</a>
                     <a href="login.jsp" class="heart-icon"><span class="icon_heart_alt"></span></a>
                     <% }
@@ -694,7 +695,7 @@
         addwishlist();
         deletecomment();
     })
-
+    // 2. Function addcart()
     function addcart() {
         $(".primary-btn.snow").each(function (e) {
             $(this).on("click", function (e) {
@@ -704,37 +705,40 @@
                 if (idAdd) {
                     // Nếu không có giá trị, chuyển hướng sang trang đăng nhập
                     e.preventDefault();
+                    // 4. Call Post: host://api/v1/Cart/Add
+                    $.ajax({
+                        url: "/api/v1/Cart/Add",
+                        type: "post",
+                        data: {
+                            idAdd: idAdd,
+                            quantity: quantity
+                        },
+                        success: function (data) {
+                            console.log(data)
+                            // var response = JSON.parse(data);
+                            var mess = data.message;
+                            var totalCartValue = data.totalCartValue;
+
+                            // Cập nhật số lượng sản phẩm trong giỏ hàng
+                            // 6. Cập nhật dữ liệu lên trang web
+                            $(".header__second__cart--notice").each(function () {
+                                // Lấy số lượng hiện tại từ phần tử DOM và chuyển đổi thành số nguyên
+                                var quantitycart = parseInt($(this).text());
+                                // Cộng thêm số lượng mới vừa thêm vào giỏ hàng và chuyển đổi thành số nguyên
+                                var newQuantity = quantitycart + parseInt(quantity);
+                                // Cập nhật phần tử DOM để hiển thị số lượng mới
+                                $(this).text(newQuantity);
+                            });
+
+                            // Cập nhật tổng giá trị giỏ hàng
+                            $(".header__cart__price").text(totalCartValue);
+
+                            // Hiển thị thông báo
+                            alert(mess);
+                        }
+                    })
                 }
-                $.ajax({
-                    url: "/api/v1/Cart/Add",
-                    type: "post",
-                    data: {
-                        idAdd: idAdd,
-                        quantity: quantity
-                    },
-                    success: function (data) {
-                        console.log(data)
-                        // var response = JSON.parse(data);
-                        var mess = data.message;
-                        var totalCartValue = data.totalCartValue;
 
-                        // Cập nhật số lượng sản phẩm trong giỏ hàng
-                        $(".header__second__cart--notice").each(function () {
-                            // Lấy số lượng hiện tại từ phần tử DOM và chuyển đổi thành số nguyên
-                            var quantitycart = parseInt($(this).text());
-                            // Cộng thêm số lượng mới vừa thêm vào giỏ hàng và chuyển đổi thành số nguyên
-                            var newQuantity = quantitycart + parseInt(quantity);
-                            // Cập nhật phần tử DOM để hiển thị số lượng mới
-                            $(this).text(newQuantity);
-                        });
-
-                        // Cập nhật tổng giá trị giỏ hàng
-                        $(".header__cart__price").text(totalCartValue);
-
-                        // Hiển thị thông báo
-                        alert(mess);
-                    }
-                })
             })
         });
     }
