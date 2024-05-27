@@ -19,7 +19,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="utf-8" %>
 <!DOCTYPE html>
 <html lang="zxx">
-
+<head>
 
 <meta charset="UTF-8">
 <meta name="description" content="Ogani Template">
@@ -377,57 +377,57 @@
 <!-- Featured Section End -->
 
 <!-- Banner Begin -->
-<div class="banner">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-6 col-md-6 col-sm-6">
-                <div class="banner__pic">
-                    <img src="img/banner/banner-1.jpg" alt="">
-                </div>
-            </div>
-            <div class="col-lg-6 col-md-6 col-sm-6">
-                <div class="banner__pic">
-                    <img src="img/banner/banner-2.jpg" alt="">
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- Banner End -->
+<%--<div class="banner">--%>
+<%--    <div class="container">--%>
+<%--        <div class="row">--%>
+<%--            <div class="col-lg-6 col-md-6 col-sm-6">--%>
+<%--                <div class="banner__pic">--%>
+<%--                    <img src="img/banner/banner-1.jpg" alt="">--%>
+<%--                </div>--%>
+<%--            </div>--%>
+<%--            <div class="col-lg-6 col-md-6 col-sm-6">--%>
+<%--                <div class="banner__pic">--%>
+<%--                    <img src="img/banner/banner-2.jpg" alt="">--%>
+<%--                </div>--%>
+<%--            </div>--%>
+<%--        </div>--%>
+<%--    </div>--%>
+<%--</div>--%>
+<%--<!-- Banner End -->--%>
 
 
-<!-- Blog Section Begin -->
-<section class="from-blog spad">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="section-title from-blog__title">
-                    <h2>Bài Viết Bạn Có Thể Thích</h2>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <% List<vn.edu.hcmuaf.fit.beans.Blogs> listNewest = new BlogService().NewBlogs();
-                for(Blogs blogs2 : listNewest) {
-            %>
-            <div class="row1 col-lg-4 col-md-4 col-sm-6">
-                <div class="blog__item">
-                    <div class="blog__item__pic">
-                        <img src="<%=blogs2.getImage()%>" alt="" style="width: 290px;height: 200px; object-fit: cover">
-                    </div>
-                    <div class="blog__item__text">
-                        <ul>
-                            <li><i class="fa fa-calendar-o"></i> <%=blogs2.getCreateDate()%></li>
-                        </ul>
-                        <h5><a href="blog-details.jsp?id=<%=blogs2.getBlogId()%>"><%=blogs2.getBlogName()%></a></h5>
-                        <p><%=blogs2.getDescription()%></p>
-                    </div>
-                </div>
-            </div>
-            <% }%>
-        </div>
-    </div>
-</section>
+<%--<!-- Blog Section Begin -->--%>
+<%--<section class="from-blog spad">--%>
+<%--    <div class="container">--%>
+<%--        <div class="row">--%>
+<%--            <div class="col-lg-12">--%>
+<%--                <div class="section-title from-blog__title">--%>
+<%--                    <h2>Bài Viết Bạn Có Thể Thích</h2>--%>
+<%--                </div>--%>
+<%--            </div>--%>
+<%--        </div>--%>
+<%--        <div class="row">--%>
+<%--            <% List<vn.edu.hcmuaf.fit.beans.Blogs> listNewest = new BlogService().NewBlogs();--%>
+<%--                for(Blogs blogs2 : listNewest) {--%>
+<%--            %>--%>
+<%--            <div class="row1 col-lg-4 col-md-4 col-sm-6">--%>
+<%--                <div class="blog__item">--%>
+<%--                    <div class="blog__item__pic">--%>
+<%--                        <img src="<%=blogs2.getImage()%>" alt="" style="width: 290px;height: 200px; object-fit: cover">--%>
+<%--                    </div>--%>
+<%--                    <div class="blog__item__text">--%>
+<%--                        <ul>--%>
+<%--                            <li><i class="fa fa-calendar-o"></i> <%=blogs2.getCreateDate()%></li>--%>
+<%--                        </ul>--%>
+<%--                        <h5><a href="blog-details.jsp?id=<%=blogs2.getBlogId()%>"><%=blogs2.getBlogName()%></a></h5>--%>
+<%--                        <p><%=blogs2.getDescription()%></p>--%>
+<%--                    </div>--%>
+<%--                </div>--%>
+<%--            </div>--%>
+<%--            <% }%>--%>
+<%--        </div>--%>
+<%--    </div>--%>
+<%--</section>--%>
 <!-- Blog Section End -->
 
 <!-- Footer Section Begin -->

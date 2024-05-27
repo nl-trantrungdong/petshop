@@ -18,7 +18,7 @@ public class Category extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         DetailDAO dao = new DetailDAO();
         List<Detail> list = dao.listCategory();
-        request.setAttribute("listD", list);
+        request.setAttribute("list", list);
         request.getRequestDispatcher("index.jsp").forward(request,response);
     }
 
