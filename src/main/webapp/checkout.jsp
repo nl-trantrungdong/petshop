@@ -461,26 +461,26 @@
                             </div>
                             <div id="errorOrder" style="text-align: center; color: red"></div>
                             <button class="site-btn" id="" onclick="clickShowTableCK()">Mua hàng</button>
-                            <div id="myTableCK">
-                                <label style="font-size: 20px; text-shadow: 1px 1px 0 white, -1px -1px 0 white, 1px -1px 0 white, -1px 1px 0 white">Ký xác nhận đơn hàng</label>
-                                <br>
-                                <div style="display: inline-block ">
-                                    <label>Mã code cần ký:</label>
-                                    <input type="text" id="messageHash">
-                                    <span id="copyIcon" onclick="copyToClipboard()">📋</span>
-                                </div>
-                                <div style="display: inline-block ;align-items: center; padding-right: 37px">
-                                    <label>Mã code đã ký:</label>
-                                    <input type="text" id="messageSignedHash">
-                                </div>
-                                <br>
-                                <div id="errorCK" style="text-align: center; color: red"></div>
-                                <br>
-                                <div style="align-content: center">
-                                    <div onclick="hideTableCK()" class="bt2">Hủy</div>
-                                    <div onclick="signed()" class="bt2">Xác nhận</div>
-                                </div>
-                            </div>
+<%--                            <div id="myTableCK">--%>
+<%--                                <label style="font-size: 20px; text-shadow: 1px 1px 0 white, -1px -1px 0 white, 1px -1px 0 white, -1px 1px 0 white">Ký xác nhận đơn hàng</label>--%>
+<%--                                <br>--%>
+<%--                                <div style="display: inline-block ">--%>
+<%--                                    <label>Mã code cần ký:</label>--%>
+<%--                                    <input type="text" id="messageHash">--%>
+<%--                                    <span id="copyIcon" onclick="copyToClipboard()">📋</span>--%>
+<%--                                </div>--%>
+<%--                                <div style="display: inline-block ;align-items: center; padding-right: 37px">--%>
+<%--                                    <label>Mã code đã ký:</label>--%>
+<%--                                    <input type="text" id="messageSignedHash">--%>
+<%--                                </div>--%>
+<%--                                <br>--%>
+<%--                                <div id="errorCK" style="text-align: center; color: red"></div>--%>
+<%--                                <br>--%>
+<%--                                <div style="align-content: center">--%>
+<%--                                    <div onclick="hideTableCK()" class="bt2">Hủy</div>--%>
+<%--                                    <div onclick="signed()" class="bt2">Xác nhận</div>--%>
+<%--                                </div>--%>
+<%--                            </div>--%>
                             <input id="getDistrict" value="" type="text" style="display: none">
                             <input id="getWard"  value="" type="text" style="display: none" >
                         </div>
@@ -604,7 +604,7 @@
     }
 
     function showTable() {
-        document.getElementById("myTable").style.display = "block";
+        // document.getElementById("myTable").style.display = "block";
         document.getElementById("overlayT").classList.add("show");
 
     }
@@ -666,11 +666,13 @@
                 console.log(xhr.responseText);
 
                 if (xhr.responseText === "failure") {
-                    showTable()
+                    alert("Lỗi thanh toán");
                     //
                 }else {
-                    document.getElementById("messageHash").value = xhr.responseText;
-                    showTableCK();
+                    // document.getElementById("messageHash").value = xhr.responseText;
+                    // showTableCK();
+                    window.location.href = "index.jsp";
+                    alert("Thanh toán thành công")
                 }
 
             }
@@ -680,24 +682,24 @@
         var data = "fullName=" + fullName + "&phone=" + phone + "&address=" + address + "&email=" + email + "&notice=" + notice;
         xhr.send(data);
     }
-    function showTableCK() {
-        document.getElementById("myTableCK").style.display = "block";
-        document.getElementById("overlayT").classList.add("show");
-        document.getElementById("overlayT").addEventListener("click", hideTableOnClickOutside);
-    }
-    function hideTableOnClickOutside(event) {
-        var myTableCK = document.getElementById("myTableCK");
-
-        // Kiểm tra xem phần tử được click có phải là myTableCK không
-        if (!myTableCK.contains(event.target)) {
-            hideTableCK();
-        }
-    }
-    function hideTableCK() {
-        document.getElementById("myTableCK").style.display = "none";
-        document.getElementById("overlayT").classList.remove("show");
-        document.getElementById("overlayT").removeEventListener("click", hideTableOnClickOutside);
-    }
+    // function showTableCK() {
+    //     document.getElementById("myTableCK").style.display = "block";
+    //     document.getElementById("overlayT").classList.add("show");
+    //     document.getElementById("overlayT").addEventListener("click", hideTableOnClickOutside);
+    // }
+    // function hideTableOnClickOutside(event) {
+    //     var myTableCK = document.getElementById("myTableCK");
+    //
+    //     // Kiểm tra xem phần tử được click có phải là myTableCK không
+    //     if (!myTableCK.contains(event.target)) {
+    //         hideTableCK();
+    //     }
+    // }
+    // function hideTableCK() {
+    //     document.getElementById("myTableCK").style.display = "none";
+    //     document.getElementById("overlayT").classList.remove("show");
+    //     document.getElementById("overlayT").removeEventListener("click", hideTableOnClickOutside);
+    // }
 
     var soNha = document.getElementById("soNha").value;
 
