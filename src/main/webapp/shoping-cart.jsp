@@ -380,6 +380,11 @@
                         <li>Tổng tiền <span
                                 class="total__price"><%=cart != null ? format.format(cart.total()) : 0%>₫</span></li>
                     </ul>
+
+                    <!--
+                        0.  Truy cập vào trang shopping-cart.jsp
+                        1.  Nhấn vào “CHUYỂN ĐẾN PHẦN THANH TOÁN”
+                     -->
                     <%if (cart != null && cart.getQuantity_cart()>0) {%>
                         <a href="checkout.jsp" class="primary-btn">CHUYỂN ĐẾN PHẦN THANH TOÁN</a>
                     <%}%>
