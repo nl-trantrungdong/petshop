@@ -60,14 +60,14 @@ public class EditProductController extends HttpServlet {
             if(id == null){
                 // 8. reponse {"reponseCode":?,"message":"?"}
                 out = response.getWriter();
-                edtResponse = new EditProductResponse(HttpServletResponse.SC_UNAUTHORIZED,"Lỗi dữ liệu không thêm được thú cưng mới"); // Giỏ hàng rỗng
+                edtResponse = new EditProductResponse(HttpServletResponse.SC_UNAUTHORIZED,"Lỗi dữ liệu không thêm được thú cưng mới");
                 jsonResponse = new Gson().toJson(edtResponse);
                 out.print(jsonResponse);
                 out.flush();
             } else {
                 // 8. reponse {"reponseCode":?,"message":"?"}
                 out = response.getWriter();
-                edtResponse = new EditProductResponse(HttpServletResponse.SC_UNAUTHORIZED,"Admin đã thêm sản phẩm thú cưng"); // Giỏ hàng rỗng
+                edtResponse = new EditProductResponse(HttpServletResponse.SC_UNAUTHORIZED,"Admin đã thêm sản phẩm thú cưng");
                 jsonResponse = new Gson().toJson(edtResponse);
                 out.print(jsonResponse);
                 out.flush();
