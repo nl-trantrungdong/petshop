@@ -476,7 +476,7 @@
                             var totalCartValue = data.totalCartValue;
 
                             // Cập nhật số lượng sản phẩm trong giỏ hàng
-                            // 6. Cập nhật dữ liệu lên trang web
+                            // 7: Cập nhật dữ liệu lên trang web
                             $(".header__second__cart--notice").each(function () {
                                 var quantity = $(this).text()
                                 $(this).text(parseInt(quantity) + 1)

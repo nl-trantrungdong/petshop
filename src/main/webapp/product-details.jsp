@@ -720,7 +720,7 @@
                             var totalCartValue = data.totalCartValue;
 
                             // Cập nhật số lượng sản phẩm trong giỏ hàng
-                            // 6. Cập nhật dữ liệu lên trang web
+                            // 7. Cập nhật dữ liệu lên trang web
                             $(".header__second__cart--notice").each(function () {
                                 // Lấy số lượng hiện tại từ phần tử DOM và chuyển đổi thành số nguyên
                                 var quantitycart = parseInt($(this).text());
