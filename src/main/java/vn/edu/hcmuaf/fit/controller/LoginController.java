@@ -55,8 +55,9 @@ public class LoginController extends HttpServlet {
                 logService.createUserLog(user.getId(), "INFOR", "Người dùng "+user.getUsername()+" đăng nhập vào hệ thống");
             }
         } else {
+            System.out.println(LoginService.getInstance().getStatus());
             request.setAttribute("loginStatus", LoginService.getInstance().getStatus());
-            request.getRequestDispatcher("login.jsp").forward(request, response);
+            request.getRequestDispatcher("/login.jsp").forward(request, response);
             response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
         }
     }

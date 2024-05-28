@@ -10,6 +10,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
+import java.util.function.DoubleToIntFunction;
 import java.util.stream.Collectors;
 
 public class ProductDAO {
@@ -581,12 +582,16 @@ public class ProductDAO {
 //            System.out.println(new ProductDAO().listRelateTo("1010"));
 //            System.out.println(new ProductDAO().getFullAdminAccessory());
 //            System.out.println( new ProductDAO().getFullProduct("10","10000","10","1"));
-//              System.out.println(new ProductDAO().getProductDetail("1004").getQuantity());
-        String id = insertProduct("2201", "abczyx", "qweqweqwe", "mo ta san pham",
+//            System.out.println(new ProductDAO().getProductDetail("1004").getQuantity());
+              String id = insertProduct("2201", "abczyx", "qweqweqwe", "mo ta san pham",
                 "mo ta san pham", "20", "mo ta san pham", "mo ta san pham",
                 "12kg", "1", "10", "1", "0",
                 "0", new String[]{"image1.jpg"});
-        System.out.println(id);
+               System.out.println(id);
+              System.out.println(new ProductDAO().getProductDetail("1004").getQuantity());
+              System.out.println(new ProductDAO().getProductsByCategory("1"));
+              System.out.println(new ProductDAO().getQuantityProduct("1001"));
+
 
     }
 }

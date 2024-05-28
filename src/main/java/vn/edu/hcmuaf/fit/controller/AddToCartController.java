@@ -29,6 +29,7 @@ public class AddToCartController extends HttpServlet {
 
     }
 
+   // 5. doPost()
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String id = request.getParameter("idAdd");
@@ -39,6 +40,7 @@ public class AddToCartController extends HttpServlet {
             response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
             response.setContentType("application/json");
             response.setCharacterEncoding("UTF-8");
+            //6. reponse {"reponseCode":?,"message":"?","totalCartValue":?}
             out = response.getWriter();
             cartResponse = new CartResponse(HttpServletResponse.SC_UNAUTHORIZED,"Người dùng chưa đăng nhập", totalCartValue); // Giỏ hàng rỗng
             jsonResponse = new Gson().toJson(cartResponse);
@@ -47,6 +49,7 @@ public class AddToCartController extends HttpServlet {
             return;
         } else if (product.getQuantity().equals("0")){
             System.out.println(product.getQuantity());
+            //6. reponse {"reponseCode":?,"message":"?","totalCartValue":?}
             response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
             response.setContentType("application/json");
             response.setCharacterEncoding("UTF-8");
@@ -59,17 +62,13 @@ public class AddToCartController extends HttpServlet {
             product.setQuantityCart(quantity);
             cart.put(id, product);
             request.getSession().setAttribute("cart", cart);
-
             // Lấy tổng giá trị giỏ hàng
             long totalCartValue = (long) cart.total();
-
             // Gửi về JSON response
+            // 6. reponse {"reponseCode":?,"message":"?","totalCartValue":?}
             response.setContentType("application/json");
             response.setCharacterEncoding("UTF-8");
-
-
             // Tạo một đối tượng JSON để chứa thông báo thành công và tổng giá trị giỏ hàng
-
             cartResponse = new CartResponse(HttpServletResponse.SC_OK,"Thêm vào giỏ hàng thành công", totalCartValue);
             String jsonResponse = gson.toJson(cartResponse);
             response.setContentType("application/json");

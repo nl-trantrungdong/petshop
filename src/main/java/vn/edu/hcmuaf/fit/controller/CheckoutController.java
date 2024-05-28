@@ -24,7 +24,7 @@ public class CheckoutController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         doPost(request, response);
     }
-    //20130252_Trần Nhựt Hào
+    //21130524 VoTanTai
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("application/json");
@@ -47,6 +47,9 @@ public class CheckoutController extends HttpServlet {
             Product pro= (Product) key.getValue();
             valueString+=pro.getProductId()+pro.getProductName()+pro.getPrice()+pro.getPromotionalPrice()+pro.getQuantityCart();
         }
+
+        cart.clear();
+        request.getSession().setAttribute("cart",cart);
         String mesageHash=new Hash().hashString(valueString);
 //        System.out.println(mesageHash);
         System.out.println(valueString);
