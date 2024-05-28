@@ -154,26 +154,26 @@
             min-width: 120px;
         }
 
-        /*#myTableCK {*/
-        /*    display: none;*/
-        /*    position: fixed;*/
-        /*    top: 50%;*/
-        /*    left: 50%;*/
-        /*    transform: translate(-50%, -50%);*/
-        /*    padding: 20px;*/
-        /*    background-image: url(img/breadcrumb.jpg);*/
-        /*    background-position: top right;*/
-        /*    z-index: 1;*/
-        /*    border-radius: 10px;*/
-        /*    border: 1px black;*/
-        /*    width: 410px;*/
-        /*    text-align: center;*/
-        /*}*/
+        #myTableCK {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            padding: 20px;
+            background-image: url(img/breadcrumb.jpg);
+            background-position: top right;
+            z-index: 1;
+            border-radius: 10px;
+            border: 1px black;
+            width: 410px;
+            text-align: center;
+        }
 
-        /*#myTableCK label {*/
-        /*    text-align: left;*/
-        /*    min-width: 120px;*/
-        /*}*/
+        #myTableCK label {
+            text-align: left;
+            min-width: 120px;
+        }
 
 
         .overlayT {
@@ -460,14 +460,14 @@
                             <p>Kiểm tra lại thông tin đơn hàng và những thông tin tôi đã nhập trước khi đặt hàng.</p>
                             <div class="checkout__input__checkbox">
                                 <label for="payment">
-                                    Thanh toán khi nhận hàng
-                                    <input type="checkbox" id="payment">
+                                    Xác nhận mua hàng
+                                    <input type="checkbox" id="payment" onchange="toggleButton()">
                                     <span class="checkmark"></span>
                                 </label>
                             </div>
                             <div id="errorOrder" style="text-align: center; color: red"></div>
                             <!-- 3.Nhấn vào 'Mua hàng'  -->
-                            <button class="site-btn" onclick="clickShowTableCK()">Mua hàng</button>
+                            <button class="site-btn" id="buyButton" onclick="clickShowTableCK()">Mua hàng</button>
 <%--                            <div id="myTableCK">--%>
 <%--                                <label style="font-size: 20px; text-shadow: 1px 1px 0 white, -1px -1px 0 white, 1px -1px 0 white, -1px 1px 0 white">Ký--%>
 <%--                                    xác nhận đơn hàng</label>--%>
@@ -658,8 +658,20 @@
     function passToUser() {
         window.location.href = '/infor-user.jsp'
     }
+    function toggleButton(){
+        var paymentCheckBox = document.getElementById('payment');
+        var buyButton = document.getElementById('buyButton');
+        buyButton.disabled = !paymentCheckBox.checked;
+    }
    <!-- 3.1.Dùng js tạo function clickShowTableCK()-->
     function clickShowTableCK() {
+        //Kiem tra checkbox
+        var paymentCheckbox = document.getElementById('payment');
+        if(!paymentCheckbox.checked){
+            alert("Bạn phải chọn 'Xác nhận mua hàng' trước khi Mua hàng.");
+            return;
+        }
+
         // Lấy dữ liệu từ các input và textarea
         var fullName = document.querySelector('.fullname').value;
         var phone = document.querySelector('.phone').value;
