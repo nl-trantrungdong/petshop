@@ -19,13 +19,15 @@ public class EditProductController extends HttpServlet {
     EditProductResponse edtResponse;
     String jsonResponse;
     Gson gson = new Gson();
-    String getJsonResponse;
     PrintWriter out;
 
+    // 5. processRequest()
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         request.setCharacterEncoding("UTF-8");
+
+        // Lấy tham số input từ trang edit=product.jsp
         String pid = request.getParameter("id");
         String pname = request.getParameter("name");
         String pprice = request.getParameter("price");
@@ -46,37 +48,31 @@ public class EditProductController extends HttpServlet {
         UserAccount AdminUser = (UserAccount) request.getSession().getAttribute("admin");
         ProductDAO dao = new ProductDAO();
 
-        if(AdminUser == null){
+        if (pid.equals("null")) {
             response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
             response.setContentType("application/json");
             response.setCharacterEncoding("UTF-8");
-            out = response.getWriter();
-            edtResponse = new EditProductResponse(HttpServletResponse.SC_UNAUTHORIZED,"Admin chưa đăng nhập "); // Giỏ hàng rỗng
-            jsonResponse = new Gson().toJson(edtResponse);
-            out.print(jsonResponse);
-            out.flush();
-        }else if (pid.equals("null")) {
-            response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-            response.setContentType("application/json");
-            response.setCharacterEncoding("UTF-8");
-            out = response.getWriter();
+            // 6. Insert Product
             String id = dao.insertProduct(AdminUser.getId(),pname,pprice,pdescription,detail,quantity,pgiong,pmausac,pcannang,CateParent,cateChild,status,Promotional,PromotionalPrice, imgFile);
-//            removeOldImg(oldImg, request);
+            // removeOldImg(oldImg, request);
             copyImage(request, imgFile);
 
-            LogService logService= new LogService();
-            UserAccount userAccount = (UserAccount) request.getSession().getAttribute("admin");
-            logService.createUserLog(userAccount.getId(), "INFOR", "Admin "+userAccount.getUsername()+" đã thêm "+dao.getProductDetail(id).getProductName()+" làm sản phẩm thú cưng mới");
-
-            out = response.getWriter();
-            edtResponse = new EditProductResponse(HttpServletResponse.SC_UNAUTHORIZED,"Admin đã thêm sản phẩm thú cưng"); // Giỏ hàng rỗng
-            jsonResponse = new Gson().toJson(edtResponse);
-            out.print(jsonResponse);
-            out.flush();
-        } else {
-            response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-            response.setContentType("application/json");
-            response.setCharacterEncoding("UTF-8");
+            if(id == null){
+                // 8. reponse {"reponseCode":?,"message":"?"}
+                out = response.getWriter();
+                edtResponse = new EditProductResponse(HttpServletResponse.SC_UNAUTHORIZED,"Lỗi dữ liệu không thêm được thú cưng mới"); // Giỏ hàng rỗng
+                jsonResponse = new Gson().toJson(edtResponse);
+                out.print(jsonResponse);
+                out.flush();
+            } else {
+                // 8. reponse {"reponseCode":?,"message":"?"}
+                out = response.getWriter();
+                edtResponse = new EditProductResponse(HttpServletResponse.SC_UNAUTHORIZED,"Admin đã thêm sản phẩm thú cưng"); // Giỏ hàng rỗng
+                jsonResponse = new Gson().toJson(edtResponse);
+                out.print(jsonResponse);
+                out.flush();
+            }
+        }else {
             dao.updateProduct(pid,AdminUser.getId(),pname,pprice,pdescription,detail,quantity,pgiong,pmausac,pcannang,CateParent,cateChild,status,Promotional,PromotionalPrice, imgFile);
 //            removeOldImg(oldImg, request);
             copyImage(request, imgFile);
@@ -84,14 +80,7 @@ public class EditProductController extends HttpServlet {
             LogService logService= new LogService();
             UserAccount userAccount = (UserAccount) request.getSession().getAttribute("admin");
             logService.createUserLog(userAccount.getId(), "INFOR", "Admin "+userAccount.getUsername()+" đã chỉnh sửa sản phẩm thú cưng "+dao.getProductDetail(pid).getProductName());
-
-            out = response.getWriter();
-            edtResponse = new EditProductResponse(HttpServletResponse.SC_UNAUTHORIZED,"Admin đã chỉnh sửa sản phẩm thú cưng"); // Giỏ hàng rỗng
-            jsonResponse = new Gson().toJson(edtResponse);
-            out.print(jsonResponse);
-            out.flush();
         }
-//        response.sendRedirect("list-products");
     }
     private void removeOldImg(String oldImg, HttpServletRequest request) {
         if (oldImg.length() > 0) {
