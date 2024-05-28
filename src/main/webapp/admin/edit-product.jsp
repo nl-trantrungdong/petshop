@@ -284,7 +284,7 @@
         <div class="row">
             <main class="main" id="top">
                 <div class="container-fluid px-0" data-layout="container">
-<%--                    Form nhập thông tin sản phẩm muốn thêm--%>
+<%--                   1. Form nhập thông tin sản phẩm muốn thêm--%>
                     <form name="item" method="post" enctype="multipart/form-data" class="mb-9">
                         <% Product p = null;
                             if (request.getParameter("pid") != null)
