@@ -284,6 +284,7 @@
         <div class="row">
             <main class="main" id="top">
                 <div class="container-fluid px-0" data-layout="container">
+<%--                    Form nhập thông tin sản phẩm muốn thêm--%>
                     <form name="item" method="post" enctype="multipart/form-data" class="mb-9">
                         <% Product p = null;
                             if (request.getParameter("pid") != null)
@@ -297,12 +298,23 @@
                                 <h2 class="mb-2">Thêm thú cưng</h2>
                                 <%}%>
                             </div>
-
+                            <div class="col-auto">
+                                <%if (request.getParameter("pid") != null) {%>
+                                <button class="btn btn-primary mb-2 mb-sm-0" type="submit">
+                                    Sửa thú cưng
+                                </button>
+                                <%} else {%>
+                                <button class="btn btn-primary mb-2 mb-sm-0" type="submit">
+                                    Đăng thú cưng
+                                </button>
+                                <%}%>
+                            </div>
                         </div>
                         <input type="text" id="pid" name="pid"
                                value="<%=(p != null) ? request.getParameter("pid") : null%>" style="display: none">
                         <h4 class="mb-3">Tên thú cưng</h4>
                         <div class="row g-5">
+<%--                            3. Admin nhập thông tin thú cưng mới--%>
                             <div class="col-12 col-xl-8">
                                 <input name="name" id="name" class="form-control mb-5" type="text"
                                        placeholder="Viết tên thú cưng tại đây..."
@@ -582,17 +594,6 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="col-auto">
-                                        <%if (request.getParameter("pid") != null) {%>
-                                        <button class="btn btn-primary mb-2 mb-sm-0" type="submit">
-                                            Sửa thú cưng
-                                        </button>
-                                        <%} else {%>
-                                        <button class="btn btn-primary mb-2 mb-sm-0" type="submit">
-                                            Đăng thú cưng
-                                        </button>
-                                        <%}%>
                                     </div>
                                 </div>
                             </div>

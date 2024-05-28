@@ -96,54 +96,61 @@ public class ProductDAO {
         });
     }
 
+    // 7. !null -> return id
+    // 7. null -> return null
     public static String insertProduct(String idAdmin, String name, String price, String description,
                                        String detail, String quantity, String giong, String mausac,
                                        String cannang, String cateParent, String cateChild, String status, String promotional,
                                        String PromotionalPrice, String[] imgFile) {
-        String id = taoIDProduct();
-        String date = java.time.LocalDate.now().toString();
-        JDBIConnector.get().withHandle(handle -> {
-            handle.createUpdate("insert into product (productId, ProductName, Image, Price, Description, " +
-                            "Dital, Quantity, CreateBy, CreateDate, giong, mausac, cannang, `Status`, PromotionalPrice,Promotional, size, ViewCount) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)")
-                    .bind(0, id)
-                    .bind(1, name)
-                    .bind(2, "http://petsshop.io.vn/img/products/" + imgFile[0])
-                    .bind(3, price)
-                    .bind(4, description)
-                    .bind(5, detail)
-                    .bind(6, quantity)
-                    .bind(7, idAdmin)
-                    .bind(8, date)
-                    .bind(9, giong)
-                    .bind(10, mausac)
-                    .bind(11, cannang)
-                    .bind(12, Integer.parseInt(status))
-                    .bind(13, Double.parseDouble(PromotionalPrice))
-                    .bind(14, Integer.parseInt(promotional))
-                    .bind(15, "")
-                    .bind(16, 0)
-                    .execute();
-            handle.createUpdate("insert into product_from_cate values (?,?)")
-                    .bind(0, id)
-                    .bind(1, cateParent)
-                    .execute();
-            handle.createUpdate("insert into product_from_cate values (?,?)")
-                    .bind(0, id)
-                    .bind(1, cateChild)
-                    .execute();
-            handle.createUpdate("insert into warehouse values (?,?)")
-                    .bind(0, id)
-                    .bind(1, quantity)
-                    .execute();
-            for (int i = 1; i < imgFile.length; i++) {
-                handle.createUpdate("insert into product_img values (?,?)")
+        try {
+            String id = taoIDProduct();
+            String date = java.time.LocalDate.now().toString();
+            JDBIConnector.get().withHandle(handle -> {
+                handle.createUpdate("insert into product (productId, ProductName, Image, Price, Description, " +
+                                "Dital, Quantity, CreateBy, CreateDate, giong, mausac, cannang, `Status`, PromotionalPrice,Promotional, size, ViewCount) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)")
                         .bind(0, id)
-                        .bind(1, "http://petsshop.io.vn/img/products/" + imgFile[i])
+                        .bind(1, name)
+                        .bind(2, "http://petsshop.io.vn/img/products/" + imgFile[0])
+                        .bind(3, price)
+                        .bind(4, description)
+                        .bind(5, detail)
+                        .bind(6, quantity)
+                        .bind(7, idAdmin)
+                        .bind(8, date)
+                        .bind(9, giong)
+                        .bind(10, mausac)
+                        .bind(11, cannang)
+                        .bind(12, Integer.parseInt(status))
+                        .bind(13, Double.parseDouble(PromotionalPrice))
+                        .bind(14, Integer.parseInt(promotional))
+                        .bind(15, "")
+                        .bind(16, 0)
                         .execute();
-            }
-            return true;
-        });
-        return id;
+                handle.createUpdate("insert into product_from_cate values (?,?)")
+                        .bind(0, id)
+                        .bind(1, cateParent)
+                        .execute();
+                handle.createUpdate("insert into product_from_cate values (?,?)")
+                        .bind(0, id)
+                        .bind(1, cateChild)
+                        .execute();
+                handle.createUpdate("insert into warehouse values (?,?)")
+                        .bind(0, id)
+                        .bind(1, quantity)
+                        .execute();
+                for (int i = 1; i < imgFile.length; i++) {
+                    handle.createUpdate("insert into product_img values (?,?)")
+                            .bind(0, id)
+                            .bind(1, "http://petsshop.io.vn/img/products/" + imgFile[i])
+                            .execute();
+                }
+                return true;
+            });
+            return id;
+        } catch (Exception e) {
+            // Không in lỗi ra console
+            return null;
+        }
     }
 
     public static String insertAccessory(String idAdmin, String name, String price, String description,
@@ -575,9 +582,16 @@ public class ProductDAO {
 //            System.out.println(new ProductDAO().listRelateTo("1010"));
 //            System.out.println(new ProductDAO().getFullAdminAccessory());
 //            System.out.println( new ProductDAO().getFullProduct("10","10000","10","1"));
+//            System.out.println(new ProductDAO().getProductDetail("1004").getQuantity());
+              String id = insertProduct("2201", "abczyx", "qweqweqwe", "mo ta san pham",
+                "mo ta san pham", "20", "mo ta san pham", "mo ta san pham",
+                "12kg", "1", "10", "1", "0",
+                "0", new String[]{"image1.jpg"});
+               System.out.println(id);
               System.out.println(new ProductDAO().getProductDetail("1004").getQuantity());
               System.out.println(new ProductDAO().getProductsByCategory("1"));
               System.out.println(new ProductDAO().getQuantityProduct("1001"));
+
 
     }
 }
