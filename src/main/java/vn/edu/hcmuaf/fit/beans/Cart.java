@@ -58,7 +58,9 @@ public class Cart implements Serializable {
         }
         return sum;
     }
-
+    public void clear() {
+        data.clear();
+    }
     @Override
     public String toString() {
         return "Cart{" +
