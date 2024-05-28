@@ -24,8 +24,11 @@ public class SearchMain extends HttpServlet {
         String txtSearch = request.getParameter("txt");
         ProductDAO dao = new ProductDAO();
         List<Product> list = dao.searchProductByName(txtSearch);
+        // Đặt danh sách sản phẩm vào request để chuyển sang trang JSP
         request.setAttribute("list", list);
+        // Chuyển hướng yêu cầu đến trang JSP "ajax/ajax_searchmain.jsp"
         request.getRequestDispatcher("ajax/ajax_searchmain.jsp").forward(request, response);
+
 
         LogService logService= new LogService();
         HttpSession session = request.getSession();
